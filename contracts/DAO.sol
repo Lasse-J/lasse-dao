@@ -12,6 +12,7 @@ contract DAO {
     struct Proposal {
         uint256 id;
         string name;
+        string description;
         uint256 amount;
         address payable recipient;
         uint256 votes;
@@ -48,11 +49,12 @@ contract DAO {
 
     modifier onlyInvestor() {
         require(token.balanceOf(msg.sender) > 0, "must be token holder");
-        _;        
+        _;
     }
 
     function createProposal(
         string memory _name,
+        string memory _description,
         uint256 _amount,
         address payable _recipient
     ) external onlyInvestor {
@@ -64,6 +66,7 @@ contract DAO {
         proposals[proposalCount] = Proposal(
             proposalCount,
             _name,
+            _description,
             _amount,
             _recipient,
             0,

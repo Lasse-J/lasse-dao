@@ -81,7 +81,7 @@ describe('Token', () => {
     describe('Success', () => {
 
       beforeEach(async () => {
-        transaction = await dao.connect(investor1).createProposal('Proposal 1', ether(100), recipient.address)
+        transaction = await dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)
         result = await transaction.wait()
       })
 
@@ -105,11 +105,11 @@ describe('Token', () => {
     describe('Failure', () => {
 
       it('rejects invalid amount', async () => {
-        await expect(dao.connect(investor1).createProposal('Proposal 1', ether(101), recipient.address)).to.be.reverted
+        await expect(dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(101), recipient.address)).to.be.reverted
       })
 
       it('rejects non-investor', async () => {
-        await expect(dao.connect(user).createProposal('Proposal 1', ether(100), recipient.address)).to.be.reverted
+        await expect(dao.connect(user).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)).to.be.reverted
       })
     })
   })
@@ -118,7 +118,7 @@ describe('Token', () => {
     let transaction, result
 
     beforeEach(async () => {
-      transaction = await dao.connect(investor1).createProposal('Proposal 1', ether(100), recipient.address)
+      transaction = await dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)
       result = await transaction.wait()
     })
 
@@ -159,7 +159,7 @@ describe('Token', () => {
     let transaction, result
 
     beforeEach(async () => {
-      transaction = await dao.connect(investor1).createProposal('Proposal 1', ether(100), recipient.address)
+      transaction = await dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)
       result = await transaction.wait()
     })
 
@@ -206,7 +206,7 @@ describe('Token', () => {
 
       beforeEach(async () => {
         // Create proposal
-        transaction = await dao.connect(investor1).createProposal('Proposal 1', ether(100), recipient.address)
+        transaction = await dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)
         result = await transaction.wait()
 
         // Vote
@@ -243,7 +243,7 @@ describe('Token', () => {
 
       beforeEach(async () => {
         // Create proposal
-        transaction = await dao.connect(investor1).createProposal('Proposal 1', ether(100), recipient.address)
+        transaction = await dao.connect(investor1).createProposal('Proposal 1', 'This is proposal 1', ether(100), recipient.address)
         result = await transaction.wait()
 
         // Vote
