@@ -23,6 +23,7 @@ function App() {
 
   const [proposals, setProposals] = useState(null)
   const [quorum, setQuorum] = useState(null)
+  const [formattedQuorum, setFormattedQuorum] = useState(null)
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -58,6 +59,8 @@ function App() {
 
     // Fetch quorum
     setQuorum(await dao.quorum())
+    const formattedQuorum = ethers.utils.formatUnits(await dao.quorum(), 18)
+    setFormattedQuorum(formattedQuorum)
 
     setIsLoading(false)
   }
@@ -73,6 +76,7 @@ function App() {
       <Navigation account={account} />
 
       <h1 className='my-4 text-center'>Welcome to Lasse DAO!</h1>
+      <p className='text-center'>The quorum for each proposal is {formattedQuorum} votes.</p>
 
       {isLoading ? (
         <Loading />
