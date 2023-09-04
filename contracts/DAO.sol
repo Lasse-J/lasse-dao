@@ -96,6 +96,23 @@ contract DAO {
         emit Vote(_id, msg.sender);
     }
 
+    function downVote(uint256 _id) external onlyInvestor {
+        // Fetch the proposal out of the mapping by id
+        Proposal storage proposal = proposals[_id];
+
+        // Dont let investors vote twice
+        require(!votes[msg.sender][_id], "already voted");
+
+        // Update the votes (weighted)
+        proposal.votes -= token.balanceOf(msg.sender);
+
+        // Track that user has voted
+        votes[msg.sender][_id] = true;
+
+        // Emit an event
+        emit Vote(_id, msg.sender);
+    }        
+
     function finalizeProposal(uint256 _id) external onlyInvestor {
         // Fetch the proposal out of the mapping by id
         Proposal storage proposal = proposals[_id];
