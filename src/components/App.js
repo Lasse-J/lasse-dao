@@ -59,7 +59,7 @@ function App() {
 
     // Fetch quorum
     setQuorum(await dao.quorum())
-    const formattedQuorum = ethers.utils.formatUnits(await dao.quorum(), 18)
+    const formattedQuorum = ethers.utils.formatUnits(await dao.quorum(), 0)
     setFormattedQuorum(formattedQuorum)
 
     setIsLoading(false)
