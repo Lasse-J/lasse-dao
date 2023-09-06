@@ -53,7 +53,7 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
             <td>{proposal.finalized ? 'Approved' : 'In Progress'}</td>
             <td>{proposal.votes.toString()}</td>
             <td>
-              {!proposal.finalized && (
+              {!proposal.finalized && !getVotes(votes) && (
                 <Button 
                   variant='primary'
                   style={{ width: '100%' }}

@@ -22,7 +22,7 @@ contract DAO {
     uint256 public proposalCount;
     mapping(uint256 => Proposal) public proposals;
 
-    mapping(address => mapping(uint256 => bool)) votes;
+    mapping(address => mapping(uint256 => bool)) public votes;
 
     event Propose(
         uint256 id,
@@ -94,6 +94,11 @@ contract DAO {
 
         // Track that user has voted
         votes[msg.sender][_id] = true;
+
+        // Fetch the boolean value if voted or not
+        function getVotes(address msg.sender, uint256 _id) public view returns (bool) {
+            return votes[msg.sender][_id];
+        }
 
         // Emit an event
         emit Vote(_id, msg.sender);
