@@ -50,7 +50,7 @@ function App() {
     const count = await dao.proposalCount()
     const items = []
 
-    for (var i = 0; i < count; i++) {
+    for(var i = 0; i < count; i++) {
       const proposal = await dao.proposals(i + 1)
       items.push(proposal)
     }
@@ -87,7 +87,6 @@ function App() {
             dao={dao}
             setIsLoading={setIsLoading}
           />
-
 
           <hr/>
           <p className='text-center'><strong>Treasury Balance:</strong> {treasuryBalance} ETH</p>

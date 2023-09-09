@@ -134,6 +134,11 @@ describe('Token', () => {
         expect(proposal.votes).to.equal(tokens(200000))
       })
 
+      it('updates voted boolean', async () => {
+        const votes = await dao.connect(investor1).getVotes(1)
+        expect(votes).to.equal(true)
+      })
+
       it('emits a vote event', async () => {
         await expect(transaction).to.emit(dao, "Vote")
           .withArgs(1, investor1.address)
