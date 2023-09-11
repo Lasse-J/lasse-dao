@@ -15,7 +15,7 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
     setIsLoading(true)
   }
 
-    const finalizeHandler = async (id) => {
+  const finalizeHandler = async (id) => {
     try {
       const signer = await provider.getSigner()
       const transaction = await dao.connect(signer).finalizeProposal(id)
@@ -25,6 +25,12 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
     }
 
     setIsLoading(true)
+  }
+
+  const hasVoted = async (id) => {
+    const signer = await provider.getSigner()
+    const transaction = await dao.connect(signer).getVotes(signer, id)
+    await transaction.wait()
   }
 
   return (
@@ -53,7 +59,7 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
             <td>{proposal.finalized ? 'Approved' : 'In Progress'}</td>
             <td>{proposal.votes.toString()}</td>
             <td>
-              {!proposal.finalized && !proposal.votes && (
+              {!proposal.finalized && hasVoted(proposal.id) && (
                 <Button 
                   variant='primary'
                   style={{ width: '100%' }}
@@ -82,3 +88,4 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
 }
 
 export default Proposals;
+ 

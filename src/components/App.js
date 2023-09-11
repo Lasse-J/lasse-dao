@@ -53,6 +53,7 @@ function App() {
     for(var i = 0; i < count; i++) {
       const proposal = await dao.proposals(i + 1)
       items.push(proposal)
+
     }
 
     setProposals(items)
@@ -106,3 +107,4 @@ function App() {
 }
 
 export default App;
+ 

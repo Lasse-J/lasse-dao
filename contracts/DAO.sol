@@ -8,7 +8,6 @@ contract DAO {
     address owner;
     Token public token;
     uint256 public quorum;
-    bool public voted;
 
     struct Proposal {
         uint256 id;
@@ -100,9 +99,9 @@ contract DAO {
         emit Vote(_id, msg.sender);
     }
 
-    function getVotes(uint256 _id) public view returns (bool) {
+    function getVotes(address _voter, uint256 _id) public view returns (bool) {
         // Fetch the boolean value if voted or not
-        return votes[msg.sender][_id];
+        return votes[_voter][_id];
     }
 
     function downVote(uint256 _id) external onlyInvestor {
@@ -147,3 +146,4 @@ contract DAO {
     }
 
 }
+ 

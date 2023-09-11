@@ -7,7 +7,7 @@ const tokens = (n) => {
 
 const ether = tokens
 
-describe('Token', () => {
+describe('DAO', () => {
   let token, dao
   let deployer,
       funder,
@@ -134,7 +134,7 @@ describe('Token', () => {
         expect(proposal.votes).to.equal(tokens(200000))
       })
 
-      it('updates voted boolean', async () => {
+      it('updates votes boolean', async () => {
         const votes = await dao.connect(investor1).getVotes(1)
         expect(votes).to.equal(true)
       })
