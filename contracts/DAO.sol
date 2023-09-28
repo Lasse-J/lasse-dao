@@ -24,6 +24,7 @@ contract DAO {
 
     mapping(address => mapping(uint256 => bool)) public votes;
 
+
     event Propose(
         uint256 id,
         uint256 amount,
@@ -99,11 +100,6 @@ contract DAO {
         emit Vote(_id, msg.sender);
     }
 
-    function getVotes(address _voter, uint256 _id) public view returns (bool) {
-        // Fetch the boolean value if voted or not
-        return votes[_voter][_id];
-    }
-
     function downVote(uint256 _id) external onlyInvestor {
         // Fetch the proposal out of the mapping by id
         Proposal storage proposal = proposals[_id];
@@ -145,5 +141,16 @@ contract DAO {
         emit Finalize(_id);
     }
 
+    function getVotes(address _voter, uint256 _id) public view returns(bool) {
+        // Fetch voted or not
+        return votes[_voter][_id];
+    }
+
+    function getRecipientBalance(uint256 _id) public view returns(uint256) {
+        // Fetch the proposal out of the mapping by id
+        Proposal storage proposal = proposals[_id];
+
+        // Fetch the balance of proposal recipient
+        return token.balanceOf(proposal.recipient);
+    }
 }
- 

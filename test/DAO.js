@@ -135,7 +135,7 @@ describe('DAO', () => {
       })
 
       it('updates votes boolean', async () => {
-        const votes = await dao.connect(investor1).getVotes(1)
+        const votes = await dao.connect(investor1).getVotes(investor1.address, 1)
         expect(votes).to.equal(true)
       })
 

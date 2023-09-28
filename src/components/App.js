@@ -48,12 +48,13 @@ function App() {
 
     // Fetch proposal count
     const count = await dao.proposalCount()
+    // To store proposals
     const items = []
 
     for(var i = 0; i < count; i++) {
+      // Fetch proposals
       const proposal = await dao.proposals(i + 1)
       items.push(proposal)
-
     }
 
     setProposals(items)
@@ -107,4 +108,3 @@ function App() {
 }
 
 export default App;
- 

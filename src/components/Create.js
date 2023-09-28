@@ -6,6 +6,7 @@ import { ethers } from 'ethers'
 
 const Create = ({ provider, dao, setIsLoading }) => {
   const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
   const [amount, setAmount] = useState(0)
   const [address, setAddress] = useState('')
   const [isWaiting, setIsWaiting] = useState(false)
@@ -18,7 +19,7 @@ const Create = ({ provider, dao, setIsLoading }) => {
       const signer = await provider.getSigner()
       const formattedAmount = ethers.utils.parseUnits(amount.toString(), 'ether')
 
-      const transaction = await dao.connect(signer).createProposal(name, formattedAmount, address)
+      const transaction = await dao.connect(signer).createProposal(name, description, formattedAmount, address)
       await transaction.wait()
     } catch {
       window.alert('User rejected or transaction reversed')
@@ -34,6 +35,12 @@ const Create = ({ provider, dao, setIsLoading }) => {
           placeholder='Enter name'
           className='my-2'
           onChange={(e) => setName(e.target.value)}
+        />
+        <Form.Control
+          type='text'
+          placeholder='Enter description'
+          className='my-2'
+          onChange={(e) => setDescription(e.target.value)}
         />
         <Form.Control
           type='number'
