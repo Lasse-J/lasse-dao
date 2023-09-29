@@ -47,7 +47,6 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
     fetchUserHasVoted();
   }, [proposals, provider, dao]);
 
-
   useEffect(() => {
     const fetchRecipientBalance = async () => {
       let recipientBalance = {};
@@ -60,7 +59,6 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
     }
     fetchRecipientBalance();
   }, [proposals, provider, dao]);
-
 
   return (
     <Table striped bordered hover responsive>
@@ -84,9 +82,9 @@ const Proposals = ({ provider, dao, proposals, quorum, setIsLoading }) => {
             <td>{proposal.id.toString()}</td>
             <td>{proposal.name}</td>
             <td>{proposal.description}</td>
-            <td>{ethers.utils.formatUnits(proposal.amount, "ether")} ETH</td>
+            <td>{ethers.utils.formatUnits(proposal.amount, 'ether')} ETH</td>
             <td>{proposal.recipient}</td>
-            <td>ETH</td>
+            <td>{recipientBalance.toString()} ETH</td>
             <td>{proposal.finalized ? 'Approved' : 'In Progress'}</td>
             <td><ProgressBar now={proposal.votes.toString() / quorum * 100} label={`${proposal.votes.toString() / quorum * 100}%`} /></td>
             <td>

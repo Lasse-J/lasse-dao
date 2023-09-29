@@ -151,6 +151,6 @@ contract DAO {
         Proposal storage proposal = proposals[_id];
 
         // Fetch the balance of proposal recipient
-        return token.balanceOf(proposal.recipient);
+        return address(proposal.recipient).balance;
     }
 }
